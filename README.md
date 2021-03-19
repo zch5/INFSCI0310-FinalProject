@@ -1,6 +1,6 @@
 # INFSCI0310-FinalProject
 
-Data for part 1 will be taken from here: https://newdata-padep-1.opendata.arcgis.com/
+Data for part 1 will be taken from here: https://newdata-padep-1.opendata.arcgis.com/<br/>
 Data for part 2 will be taken from here: https://www.census.gov/
 
 # Part 1: Determining the environmentally stressed areas
