@@ -1,0 +1,45 @@
+```{r}
+library(tidyverse)
+library(dplyr)
+library(RCurl)
+library(RJSONIO)
+```
+
+
+```{r}
+setwd("C:\\Users\\zachh\\Pitt\\3 2021 Spring\\Computation in Information Science\\Final Project")
+df1 <- read.csv("Air_Emission_Plant_-_General_Administrative_Location.csv")
+print(data)
+
+coordsx = select(df1, ï..X)
+coordsy = select(df1, Y)
+print(coordsx)
+```
+
+
+
+```{r}
+# FCC's Census Block Conversions API
+# http://www.fcc.gov/developers/census-block-conversions-api
+latlong2fips <- function(latitude, longitude) {
+  url <- "http://data.fcc.gov/api/block/find?format=json&latitude=%f&longitude=%f"
+  url <- sprintf(url, latitude, longitude)
+  json <- RCurl::getURL(url)
+  json <- RJSONIO::fromJSON(json)
+  as.character(json$County['FIPS'])
+}
+
+x = unlist(coordsx[1])
+y = unlist(coordsy[1])
+
+latlong2fips(latitude=x, longitude=y)
+
+print(3)
+```
+
+```{r}
+testpoints <- data.frame(x=c(coordsx[1], y=coordsy[1]))
+test = latlong2fips(unlist(coordsx[1]), unlist(coordsy[1]))
+print(test)
+```
+
