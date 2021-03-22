@@ -1,12 +1,12 @@
 # INFSCI0310-FinalProject
 
-There are just in case we need them:
+There are just in case we need them:<br/>
 https://data.wprdc.org/dataset/allegheny-county-covid-19-tests-cases-and-deaths/resource/4051a85a-bf92-45fc-adc6-b31eb8efaad4<br/>
 https://covidtracking.com/data/#state-pa<br/>
 https://www.opendataphilly.org/dataset/covid-hospitalizations<br/>
 
 Use this data set for now:
-https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx
+https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx<br/>
 
 
 # Part 1: Determining the covid stressed areas
