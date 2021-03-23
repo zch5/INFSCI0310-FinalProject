@@ -1,0 +1,45 @@
+Here are all the packages used for this project:
+```{r}
+library(RCurl)
+```
+
+
+## Downloading all the csv files from the online github repo
+
+The naming convention for each file goes as follows:
+
+dataset012 using camelCase
+
+0: state or county
+1: data measured
+2: demographic if listed
+
+```{r}
+#Reading in county vaccinations
+datasetCountyVaccAge <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Age_Group_Current_County_Health.csv")
+datasetCountyVaccResidence <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Day_by_County_of_Residence_Current_Health.csv")
+datasetCountyVaccEthnicity <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Ethnicity_Current_County_Health.csv")
+datasetCountyVaccGender <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Gender_Current_County_Health.csv")
+datasetCountyVaccRace <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Race_Current_County_Health.csv")
+datasetCountyVaccCurrresidence <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Residence_Current_County_Health.csv")
+
+#Reading in state vaccinations
+datasetStateVaccAge <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/PA%20Vaccinations/COVID-19_Vaccinations_by_Age_Group_Current_Statewide_Health.csv")
+datasetStateVaccEthnicity <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/PA%20Vaccinations/COVID-19_Vaccinations_by_Ethnicity_Current_Statewide_Health.csv")
+datasetStateVaccGender <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/PA%20Vaccinations/COVID-19_Vaccinations_by_Gender_Current_Statewide_Health.csv")
+datasetStateVaccRace <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/PA%20Vaccinations/COVID-19_Vaccinations_by_Race_Current_Statewide_Health.csv")
+
+#Reading in other datasets
+datasetCountyCases <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Cases_Current_Daily_County_Health.csv")
+datasetCountyDeaths <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Death_Data_Current_Daily_County_Health.csv")
+datasetCountyHospitalizations <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Hospitalizations_Current_Daily_County_Health.csv")
+datasetStateTestcounts <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_PCR_Test_Counts_March_2020_-_Current_Statewide_Health.csv")
+
+head(datasetCountyVaccAge)
+```
+
+```{r}
+#Add code for graphs and such here
+```
+
+
