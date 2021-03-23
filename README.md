@@ -1,6 +1,6 @@
 # INFSCI0310-FinalProject
 
-There are just in case we need them:<br/>
+These are just in case we need them:<br/>
 https://data.wprdc.org/dataset/allegheny-county-covid-19-tests-cases-and-deaths/resource/4051a85a-bf92-45fc-adc6-b31eb8efaad4<br/>
 https://covidtracking.com/data/#state-pa<br/>
 https://www.opendataphilly.org/dataset/covid-hospitalizations<br/>
