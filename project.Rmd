@@ -1,6 +1,7 @@
 Here are all the packages used for this project:
 ```{r}
 library(RCurl)
+library(tidyverse)
 ```
 
 
@@ -34,12 +35,30 @@ datasetCountyCases <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI031
 datasetCountyDeaths <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Death_Data_Current_Daily_County_Health.csv")
 datasetCountyHospitalizations <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Hospitalizations_Current_Daily_County_Health.csv")
 datasetStateTestcounts <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_PCR_Test_Counts_March_2020_-_Current_Statewide_Health.csv")
+```
+```{r}
+datasetCountyVaccAge[is.na(datasetCountyVaccAge)] <- 0
+datasetCountyVaccResidence[is.na(datasetCountyVaccResidence)] <- 0
+datasetCountyVaccEthnicity[is.na(datasetCountyVaccEthnicity)] <- 0
+datasetCountyVaccGender[is.na(datasetCountyVaccGender)] <- 0
+datasetCountyVaccRace[is.na(datasetCountyVaccRace)] <- 0
+datasetCountyVaccCurrresidence[is.na(datasetCountyVaccCurrresidence)] <- 0
 
-head(datasetCountyVaccAge)
+datasetStateVaccAge[is.na(datasetStateVaccAge)] <- 0
+datasetStateVaccEthnicity[is.na(datasetStateVaccEthnicity)] <- 0
+datasetStateVaccGender[is.na(datasetStateVaccGender)] <- 0
+datasetStateVaccRace[is.na(datasetStateVaccRace)] <- 0
+
+datasetCountyCases[is.na(datasetCountyCases)] <- 0
+datasetCountyDeaths[is.na(datasetCountyDeaths)] <- 0
+datasetCountyHospitalizations[is.na(datasetCountyHospitalizations)] <- 0
+datasetStateTestcounts[is.na(datasetStateTestcounts)] <- 0
 ```
 
 ```{r}
 #Add code for graphs and such here
+boxplot(split(datasetStateVaccAge$Fully.Covered, datasetStateVaccAge$Age.Group), main='Title')
+lm(Age.Group~Partially.Covered, data = datasetStateVaccAge)
 ```
 
 
