@@ -5,8 +5,9 @@ https://data.wprdc.org/dataset/allegheny-county-covid-19-tests-cases-and-deaths/
 https://covidtracking.com/data/#state-pa<br/>
 https://www.opendataphilly.org/dataset/covid-hospitalizations<br/>
 
-Use this data set for now:
+Use these data sets for now:
 https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx<br/>
+https://datausa.io/profile/geo/pennsylvania<br/>
 
 
 # Part 1: Determining the covid stressed areas
