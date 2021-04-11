@@ -5,7 +5,7 @@ https://data.wprdc.org/dataset/allegheny-county-covid-19-tests-cases-and-deaths/
 https://covidtracking.com/data/#state-pa<br/>
 https://www.opendataphilly.org/dataset/covid-hospitalizations<br/>
 
-Use these data sets for now:
+Use these data sets for now:<br/>
 https://www.health.pa.gov/topics/disease/coronavirus/Vaccine/Pages/Vaccine.aspx<br/>
 https://datausa.io/profile/geo/pennsylvania<br/>
 
