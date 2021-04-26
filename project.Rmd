@@ -2,6 +2,10 @@ Here are all the packages used for this project:
 ```{r}
 library(RCurl)
 library(tidyverse)
+library(ggplot2)
+library(hrbrthemes)
+library(ggcorrplot)
+library(fmsb)
 ```
 
 
@@ -16,6 +20,8 @@ dataset012 using camelCase
 2: demographic if listed
 
 ```{r}
+#Reads in all the datasets
+
 #Reading in county vaccinations
 datasetCountyVaccAge <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Age_Group_Current_County_Health.csv")
 datasetCountyVaccResidence <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/County%20Vaccinations/COVID-19_Vaccinations_by_Day_by_County_of_Residence_Current_Health.csv")
@@ -35,8 +41,15 @@ datasetCountyCases <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI031
 datasetCountyDeaths <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Death_Data_Current_Daily_County_Health.csv")
 datasetCountyHospitalizations <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_Aggregate_Hospitalizations_Current_Daily_County_Health.csv")
 datasetStateTestcounts <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/COVID-19_PCR_Test_Counts_March_2020_-_Current_Statewide_Health.csv")
+
+#Others folder
+datasetStateDemographics <- read.csv("https://raw.githubusercontent.com/zch5/INFSCI0310-FinalProject/main/Datasets/Others/Race%20and%20Ethnicity.csv")
 ```
+
+
 ```{r}
+#Changes all not a numbers to 0s
+
 datasetCountyVaccAge[is.na(datasetCountyVaccAge)] <- 0
 datasetCountyVaccResidence[is.na(datasetCountyVaccResidence)] <- 0
 datasetCountyVaccEthnicity[is.na(datasetCountyVaccEthnicity)] <- 0
@@ -53,12 +66,120 @@ datasetCountyCases[is.na(datasetCountyCases)] <- 0
 datasetCountyDeaths[is.na(datasetCountyDeaths)] <- 0
 datasetCountyHospitalizations[is.na(datasetCountyHospitalizations)] <- 0
 datasetStateTestcounts[is.na(datasetStateTestcounts)] <- 0
+
 ```
 
 ```{r}
+head(datasetCountyVaccAge)
+```
+
+
+```{r}
+
 #Add code for graphs and such here
-boxplot(split(datasetStateVaccAge$Fully.Covered, datasetStateVaccAge$Age.Group), main='Title')
-lm(Age.Group~Partially.Covered, data = datasetStateVaccAge)
+#lm(Airborn.Isolation.Beds.Available~Medical.Surgical.Beds.Available, data = datasetCountyHospitalizations)
+#newframe = merge(datasetStateVaccRace, datasetStateDemographics, by="Race")
+#head(newframe)
+#ggplot(datasetStateVaccRace, aes(x=Partially.Covered, y=Fully.Covered, color=Race)) + geom_point(size=6) + theme_ipsum()
+```
+
+
+
+
+Lets look at vaccinations by gender
+Note that partially covered DOES NOT include fully covered
+```{r}
+
+#df = subset(datasetCountyVaccAge, select = -c(County.Name))
+#df$Partially.Covered.Age.Group.15.19 <- as.numeric((datasetCountyVaccAge$Partially.Covered.Age.Group.15.19))
+head(datasetStateVaccGender)
+
+options(scipen=5)          #Tells R not to do scientific notation
+ggplot(datasetStateVaccGender, aes(Gender, Partially.Covered, fill=Gender)) + geom_bar(stat = "identity")
+ggplot(datasetStateVaccGender, aes(Gender, Fully.Covered, fill=Gender)) + geom_bar(stat = "identity")
+```
+
+
+Lets look at vaccinations by age
+Note that partially covered DOES NOT include fully covered
+```{r}
+df = datasetStateVaccAge
+head(df)
+
+#Sets up everything over 100
+df[1, 1] = 'Over 100'
+df[1, 2] = df[1, 2] + df[10, 2]
+df[1, 3] = df[1, 3] + df[10, 3]
+df <- df[-c(10),]
+
+options(scipen=5)          #Tells R not to do scientific notation
+graph1 <- ggplot(df, aes(Age.Group, Partially.Covered, fill=Age.Group)) + geom_bar(stat = "identity")
+graph1 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+graph2 <- ggplot(df, aes(Age.Group, Fully.Covered, fill=Age.Group)) + geom_bar(stat = "identity")
+graph2 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+Lets look at vaccinations by ethnicity
+Note that partially covered DOES NOT include fully covered
+```{r}
+df = datasetStateVaccEthnicity
+head(df)
+
+
+options(scipen=5)          #Tells R not to do scientific notation
+graph1 <- ggplot(df, aes(Ethnicity, Partially.Covered, fill=Ethnicity)) + geom_bar(stat = "identity")
+graph1 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+graph2 <- ggplot(df, aes(Ethnicity, Fully.Covered, fill=Ethnicity)) + geom_bar(stat = "identity")
+graph2 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+
+Lets look at vaccinations by race
+Note that partially covered DOES NOT include fully covered
+```{r}
+df = datasetStateVaccRace
+head(df)
+
+
+options(scipen=5)          #Tells R not to do scientific notation
+graph1 <- ggplot(df, aes(Race, Partially.Covered, fill=Race)) + geom_bar(stat = "identity")
+graph1 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+graph2 <- ggplot(df, aes(Race, Fully.Covered, fill=Race)) + geom_bar(stat = "identity")
+graph2 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+#Comparing that to state stats
+df1 = datasetStateDemographics
+df2 = data.frame("Race" = c("African American", "Asian", "Multiple/Other", "Native American", "Unknown", "White"), "Population" = 0)
+df2[1, 2] = df1[3, 11]
+df2[2, 2] = df1[7, 11]
+df2[3, 2] = df1[13, 11]
+df2[4, 2] = df1[5, 11]
+df2[5, 2] = df1[11, 11]
+df2[6, 2] = df1[1, 11]
+df2
+graph3 <- ggplot(df2, aes(Race, Population, fill=Race)) + geom_bar(stat = "identity")
+graph3 + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+```
+Lets look at vaccinations by County
+```{r}
+df <- datasetCountyVaccGender
+df
+
+#Splitting in half
+df1 = df[1:204,]
+df2 = df[205:407,]
+
+
+x = df1$County.Name
+y = df1$Total.Count
+
+graph = ggplot(df1, aes(x=x, y=y)) + geom_point() + geom_segment(aes(x=x, xend=x, y=0, yend=y))
+graph + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("COVID-19 Vaccines by PA County (1)") + xlab("County") + ylab("Vaccination Total")
+
+x = df2$County.Name
+y = df2$Total.Count
+
+graph = ggplot(df2, aes(x=x, y=y)) + geom_point() + geom_segment(aes(x=x, xend=x, y=0, yend=y))
+graph + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("COVID-19 Vaccines by PA County (2)") + xlab("County") + ylab("Vaccination Total")
 ```
 
 
